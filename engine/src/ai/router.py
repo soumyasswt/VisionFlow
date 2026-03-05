@@ -2,6 +2,7 @@ import json
 import asyncio
 from fastapi import FastAPI, UploadFile, File, Form, Request
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sse_starlette.sse import EventSourceResponse
 
 # Absolute imports based on our engine directory structure
@@ -11,6 +12,16 @@ from .retriever import GraphRetriever
 from .synthesizer import ContextBuilder, GraphSynthesizer
 
 app = FastAPI(title="VisionFlow AI Reasoning Layer")
+
+# Allow all origins so the Vercel frontend can talk to this service
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Mocks for demonstration of dependency injection
 class MockLLM:
