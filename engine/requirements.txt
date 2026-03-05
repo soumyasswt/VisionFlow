@@ -5,6 +5,5 @@ duckdb
 tiktoken
 python-multipart
 sse-starlette
-scip-python
-scip-typescript
-gitpython
+scip
+GitPython
