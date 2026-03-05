@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package visionflow;
+
+message Node {
+  string id = 1;
+  string label = 2;
+  string type = 3;
+  float x = 4;
+  float y = 5;
+  string diff_state = 6; 
+}
+
+message Edge {
+  string source = 1;
+  string target = 2;
+  string type = 3;
+  float weight = 4;
+  string diff_state = 5;
+}
+
+message GraphChunk {
+  repeated Node nodes = 1;
+  repeated Edge edges = 2;
+}

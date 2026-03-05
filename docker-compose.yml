@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  visionflow_redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  visionflow_engine:
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DUCKDB_PATH=/data/graph.duckdb
+    volumes:
+      - engine_data:/data
+      - ./datasets:/app/datasets
+
+  visionflow_api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://visionflow_redis:6379
+      - PORT=3000
+    depends_on:
+      - visionflow_redis
+
+  visionflow_web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - visionflow_api
+      - visionflow_engine
+
+volumes:
+  redis_data:
+  engine_data:
