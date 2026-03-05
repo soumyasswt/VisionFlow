@@ -1,10 +1,22 @@
-FROM node:20-alpine
+FROM node:20-slim
+
+# Install system dependencies for native modules (DuckDB)
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --production
+
+# Install all dependencies (including devDeps for build/ts-node)
+RUN npm install
+
 COPY . .
-# Compile TS to JS if needed, or run using ts-node in prod (not recommended, but fine for MVP)
-# Better to run `npm run build` and start the JS, assuming there's a build script.
-RUN npm install -g typescript ts-node
+
+# Expose the API port
 EXPOSE 3000
+
+# Start with ts-node for now (MVP simple)
 CMD ["npx", "ts-node", "src/index.ts"]
