@@ -1,4 +1,3 @@
-import React from 'react';
 import { GraphCanvas } from './GraphCanvas';
 
 export const App = () => {

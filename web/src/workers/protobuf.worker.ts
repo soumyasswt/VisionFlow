@@ -59,7 +59,7 @@ self.onmessage = async (e: MessageEvent) => {
         });
 
         // 3. Transfer buffers with zero-copy explicitly 
-        self.postMessage(
+        (self as any).postMessage(
             {
                 nodes: chunk.nodes, // metadata for UI React lookup
                 nodePositions,
@@ -74,7 +74,7 @@ self.onmessage = async (e: MessageEvent) => {
                 nodePickingIds.buffer,
                 edgeSources.buffer,
                 edgeTargets.buffer
-            ]
+            ] as Transferable[]
         );
 
     } catch (error) {
