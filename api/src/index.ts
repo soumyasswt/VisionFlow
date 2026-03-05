@@ -94,10 +94,15 @@ app.post('/webhook/invalidate', async (request, reply) => {
     }
 });
 
-app.listen({ port: 3000 }, (err, address) => {
-    if (err) {
+const start = async () => {
+    try {
+        const port = Number(process.env.PORT) || 3000;
+        const address = await app.listen({ port, host: '0.0.0.0' });
+        app.log.info(`API listening at ${address}`);
+    } catch (err) {
         app.log.error(err);
         process.exit(1);
     }
-    app.log.info(`API listening at ${address}`);
-});
+};
+
+start();
