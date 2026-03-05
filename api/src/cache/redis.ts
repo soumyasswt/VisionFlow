@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 
-// Connect to local Redis instance
-export const redis = new Redis();
+// Connect to Redis instance (local or remote via REDIS_URL)
+export const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
 
 export async function cacheGraphChunk(
     commitHash: string,
