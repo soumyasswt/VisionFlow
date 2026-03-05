@@ -1,7 +1,5 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-"use strict";
-
-var $protobuf = require("protobufjs/minimal");
+import * as $protobuf from "protobufjs/minimal";
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -9,7 +7,7 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.visionflow = (function() {
+$root.visionflow = (function () {
 
     /**
      * Namespace visionflow.
@@ -18,7 +16,7 @@ $root.visionflow = (function() {
      */
     var visionflow = {};
 
-    visionflow.Node = (function() {
+    visionflow.Node = (function () {
 
         /**
          * Properties of a Node.
@@ -167,33 +165,33 @@ $root.visionflow = (function() {
                 if (tag === error)
                     break;
                 switch (tag >>> 3) {
-                case 1: {
+                    case 1: {
                         message.id = reader.string();
                         break;
                     }
-                case 2: {
+                    case 2: {
                         message.label = reader.string();
                         break;
                     }
-                case 3: {
+                    case 3: {
                         message.type = reader.string();
                         break;
                     }
-                case 4: {
+                    case 4: {
                         message.x = reader.float();
                         break;
                     }
-                case 5: {
+                    case 5: {
                         message.y = reader.float();
                         break;
                     }
-                case 6: {
+                    case 6: {
                         message.diffState = reader.string();
                         break;
                     }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -339,7 +337,7 @@ $root.visionflow = (function() {
         return Node;
     })();
 
-    visionflow.Edge = (function() {
+    visionflow.Edge = (function () {
 
         /**
          * Properties of an Edge.
@@ -477,29 +475,29 @@ $root.visionflow = (function() {
                 if (tag === error)
                     break;
                 switch (tag >>> 3) {
-                case 1: {
+                    case 1: {
                         message.source = reader.string();
                         break;
                     }
-                case 2: {
+                    case 2: {
                         message.target = reader.string();
                         break;
                     }
-                case 3: {
+                    case 3: {
                         message.type = reader.string();
                         break;
                     }
-                case 4: {
+                    case 4: {
                         message.weight = reader.float();
                         break;
                     }
-                case 5: {
+                    case 5: {
                         message.diffState = reader.string();
                         break;
                     }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -637,7 +635,7 @@ $root.visionflow = (function() {
         return Edge;
     })();
 
-    visionflow.GraphChunk = (function() {
+    visionflow.GraphChunk = (function () {
 
         /**
          * Properties of a GraphChunk.
@@ -746,21 +744,21 @@ $root.visionflow = (function() {
                 if (tag === error)
                     break;
                 switch (tag >>> 3) {
-                case 1: {
+                    case 1: {
                         if (!(message.nodes && message.nodes.length))
                             message.nodes = [];
                         message.nodes.push($root.visionflow.Node.decode(reader, reader.uint32()));
                         break;
                     }
-                case 2: {
+                    case 2: {
                         if (!(message.edges && message.edges.length))
                             message.edges = [];
                         message.edges.push($root.visionflow.Edge.decode(reader, reader.uint32()));
                         break;
                     }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
                 }
             }
             return message;
@@ -911,4 +909,5 @@ $root.visionflow = (function() {
     return visionflow;
 })();
 
-module.exports = $root;
+export { $root };
+export const visionflow = $root.visionflow;
