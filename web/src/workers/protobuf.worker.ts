@@ -1,4 +1,3 @@
-// @ts-ignore - The generated protobuf file will be placed here
 import { visionflow } from '../proto/graph.js';
 
 self.onmessage = async (e: MessageEvent) => {
