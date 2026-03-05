@@ -17,7 +17,8 @@ export function useAIStream(commitId: string) {
         setStatus('Initializing RAG pipeline...');
 
         try {
-            const response = await fetch('http://localhost:8000/ai/query', {
+            const ENGINE_URL = import.meta.env.VITE_ENGINE_URL || 'http://localhost:8000';
+            const response = await fetch(`${ENGINE_URL}/ai/query`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt, commit_id: commitId }),
